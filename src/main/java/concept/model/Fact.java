@@ -23,16 +23,20 @@
  */
 package concept.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import concept.interfaces.Matcher;
 import concept.matcher.AbstractMatcher;
 
 /**
  * A fact is a name, a description and a matcher with a value to be matched.
- *
- * @param <T>
  */
-public class Fact<T> extends AbstractEntity implements Matcher {
+public class Fact extends AbstractEntity implements Matcher {
 
+    /**
+     * Matcher for this fact.
+     */
     private final AbstractMatcher matcher;
 
     /**
@@ -49,11 +53,44 @@ public class Fact<T> extends AbstractEntity implements Matcher {
     }
 
     /**
+     * @return matcher for this fact.
+     */
+    public AbstractMatcher getMatcher() {
+        return this.matcher;
+    }
+
+    /**
      * @param object
      * @return
      */
     @Override
     public boolean match(final Object object) {
         return this.matcher.match(object);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Fact)) {
+            return false;
+        }
+
+        final Fact other = (Fact) obj;
+
+        final EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.getName(), other.getName());
+        builder.append(this.getMatcher(), other.getMatcher());
+        return builder.isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        final HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.getName());
+        builder.append(this.getMatcher());
+        return builder.hashCode();
     }
 }

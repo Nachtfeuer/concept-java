@@ -1,7 +1,7 @@
 /**
   @author  Thomas Lehmann
-  @file    DummyDescription.java
-  @brief   Test tool.
+  @file    Deserializer.java
+  @brief   Some tools for reading from a file.
 
   Copyright (c) 2015 Thomas Lehmann
    
@@ -23,50 +23,37 @@
  */
 package concept.tools;
 
-import org.hamcrest.Description;
-import org.hamcrest.SelfDescribing;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import concept.matcher.AbstractMatcher;
+import concept.matcher.gson.MatcherSerializer;
 
 /**
- * Test tool.
+ * Some tools for reading from a file.
  */
-public class DummyDescription implements Description {
-    
+public final class Deserializer {
     /**
-     * value passed last call of {@link DummyDescription#appendText}.
+     * @param pathAndFileName
+     *            path and name of file
+     * @param cls
+     *            class for which to deserialize.
+     * @param <T>
+     * @return instance of type T or null if failed to read JSON file.
+     * @throws FileNotFoundException
+     *             if file has not been found.
      */
-    public String appendText = null;
+    public static <T> T withGsonFromJson(final String pathAndFileName, final Class<T> cls)
+            throws FileNotFoundException {
+        final GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(AbstractMatcher.class, new MatcherSerializer());
+        final Gson gson = gsonBuilder.create();
 
-    @Override
-    public Description appendText(String text) {
-        this.appendText = text;
-        return this;
-    }
-
-    @Override
-    public Description appendDescriptionOf(SelfDescribing value) {
-        return this;
-    }
-
-    @Override
-    public Description appendValue(Object value) {
-        return this;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> Description appendValueList(String start, String separator, String end, T... values) {
-        return this;
-    }
-
-    @Override
-    public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values) {
-        return this;
-    }
-
-    @Override
-    public Description appendList(String start, String separator, String end,
-            Iterable<? extends SelfDescribing> values) {
-        return this;
+        final FileReader reader = new FileReader(pathAndFileName);
+        return gson.fromJson(reader, cls);
     }
 
 }

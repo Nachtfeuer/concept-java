@@ -40,7 +40,7 @@ public class TestFact {
      */
     @Test
     public void testIntegerAndIsMatcher() {
-        final Fact<Integer> fact = new Fact<>("John", "age of John", new IsMatcher<>(46));
+        final Fact fact = new Fact("John", "age of John", new IsMatcher<>(46));
         assertThat(fact.getName(), equalTo("John"));
         assertThat(fact.getDescription(), equalTo("age of John"));
         assertThat(fact.match(46), equalTo(true));
@@ -54,7 +54,7 @@ public class TestFact {
      */
     @Test
     public void testIntegerAndIsMatcherWithJson() {
-        final Fact<Integer> fact = new Fact<>("John", "age of John", new IsMatcher<>(46));
+        final Fact fact = new Fact("John", "age of John", new IsMatcher<>(46));
         final StringBuilder json = new StringBuilder();
         json.append("{\"matcher\":{\"IsMatcher\":{\"value\":\"46\",\"type\":\"java.lang.Integer\"}},");
         json.append("\"name\":\"John\",");

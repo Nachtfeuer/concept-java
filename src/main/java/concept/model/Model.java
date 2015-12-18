@@ -33,6 +33,8 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import concept.collections.MultiMap;
+
 /**
  * A model has a name and a description.
  */
@@ -48,6 +50,11 @@ public class Model extends AbstractEntity {
     private final Map<String, Subject> subjects;
 
     /**
+     * Container with registered facts (by its name).
+     */
+    private final MultiMap<String, Fact> facts;
+
+    /**
      * Initializes the model.
      * 
      * @param name
@@ -58,6 +65,7 @@ public class Model extends AbstractEntity {
     public Model(final String name, final String description) {
         super(name, description);
         this.subjects = new HashMap<>();
+        this.facts = new MultiMap<>();
     }
 
     @Override
@@ -78,8 +86,8 @@ public class Model extends AbstractEntity {
      * Adding an entity to the model.
      * 
      * @param subject
-     *            expected to an instance of class {@link AbstractEntity} but not a
-     *            derived one!
+     *            expected to an instance of class {@link AbstractEntity} but
+     *            not a derived one!
      * @return true when successfully added. You can add two entities with same
      *         name once only.
      */
@@ -98,6 +106,28 @@ public class Model extends AbstractEntity {
      */
     public Subject getSubject(final String name) {
         return this.subjects.get(name);
+    }
+
+    /**
+     * @return true when there is at least one registered fact.
+     */
+    public boolean hasFacts() {
+        return !this.facts.isEmpty();
+    }
+
+    /**
+     * Adding a fact to the model.
+     * 
+     * @param fact
+     *            new fact to add to the model.
+     * @return true when successfully added the fact otherwise false.
+     */
+    public boolean addFact(final Fact fact) {
+        if (fact == null) {
+            return false;
+        }
+
+        return this.facts.put(fact.getName(), fact);
     }
 
     /**

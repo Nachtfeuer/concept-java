@@ -4,14 +4,15 @@ Welcome to the concept todo page:
 
   Todo:
     All those tasks have not yet been started ...
+    - configure project for log4j configuration @todo @configuration @logging
 
   Work in progress:
     All those task have been started already ...
-    - providing a class to handle fact @todo @feature_facts
     - providing matcher classes  @todo @feature_matcher
+    - providing a class for a fact @todo @feature_facts
 
   Done:
     All those tasks have been done ...
-    - checkstyle at pom level @done @maven
+    - checkstyle at pom level @done @maven @quality
 
 

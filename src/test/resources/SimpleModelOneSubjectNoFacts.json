@@ -1,0 +1,11 @@
+{
+    "subjects": {
+        "Agatha Christie": {
+            "name": "Agatha Christie",
+            "description": "is a writer"
+        }
+    },
+    "facts": {},
+    "name": "persons",
+    "description": "model about some persons"
+}

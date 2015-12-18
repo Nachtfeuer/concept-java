@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
+import concept.matcher.IsMatcher;
+
 /**
  * Testing of class {@link concept.model.Model}.
  */
@@ -57,8 +59,12 @@ public class TestModel {
     @Test
     public void testToJsonWithEmptyModel() {
         final Model model = new Model("persons", "about some persons");
-        final String expected = "{\"subjects\":{},\"name\":\"persons\",\"description\":\"about some persons\"}";
-        assertThat(model.toJson(), equalTo(expected));
+        final StringBuilder json = new StringBuilder();
+        json.append("{\"subjects\":{},");
+        json.append("\"facts\":{\"data\":{}},");
+        json.append("\"name\":\"persons\",\"description\":\"about some persons\"}");
+
+        assertThat(model.toJson(), equalTo(json.toString()));
     }
 
     /**
@@ -73,6 +79,7 @@ public class TestModel {
         final StringBuilder json = new StringBuilder();
         json.append("{\"subjects\":");
         json.append("{\"Agatha Christie\":{\"name\":\"Agatha Christie\",\"description\":\"is a writer\"}},");
+        json.append("\"facts\":{\"data\":{}},");
         json.append("\"name\":\"persons\",\"description\":\"about some persons\"}");
 
         assertThat(model.toJson(), equalTo(json.toString()));
@@ -132,4 +139,20 @@ public class TestModel {
         final Model model = Model.fromJson("{}");
         assertThat(model, equalTo((Model) null));
     }
+
+    /**
+     * Testing of {@link concept.model.Model#addFact(Fact)}. You cannot add same
+     * fact twice.
+     */
+    @Test
+    public void testAddOneFact() {
+        final Model model = new Model("persons", "about some persons");
+        final Fact fact = new Fact("John", "one person", new IsMatcher<>(46));
+        assertThat(model.addFact(fact), equalTo(true));
+        assertThat(model.addFact(fact), equalTo(false));
+
+        final Fact sameFact = new Fact("John", "one person", new IsMatcher<>(46));
+        assertThat(model.addFact(sameFact), equalTo(false));
+    }
+
 }

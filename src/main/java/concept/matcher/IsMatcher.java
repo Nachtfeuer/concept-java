@@ -23,6 +23,9 @@
  */
 package concept.matcher;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Matcher for testing two values to be equal.
  *
@@ -49,4 +52,32 @@ public class IsMatcher<T> extends GenericMatcher<T> {
     public String getName() {
         return "IsMatcher";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof IsMatcher)) {
+            return false;
+        }
+
+        @SuppressWarnings("rawtypes")
+        final IsMatcher other = (IsMatcher) obj;
+
+        final EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.getName(), other.getName());
+        builder.append(this.getValue(), other.getValue());
+        return builder.isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        final HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.getName());
+        builder.append(this.getValue());
+        return builder.hashCode();
+    }
+
 }
