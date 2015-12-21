@@ -77,7 +77,7 @@ public class Parser {
      *
      * @param script
      *            a whole script containing model, subjects and comments.
-     * @return unique set of models or null if an error has occured.
+     * @return unique set of models or null if an error has occurred.
      */
     public static Set<Model> parseScript(final String script) {
         final Set<Model> models = new HashSet<>();

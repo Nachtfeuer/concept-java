@@ -1,18 +1,21 @@
-Welcome to the concept todo page:
+Welcome to the concept simple todo page:
 
   Read here: http://www.sebastianbenz.de/a-simple-text-based-todo-editor-for-eclipse
 
   Todo:
     All those tasks have not yet been started ...
-    - configure project for log4j configuration @todo @configuration @logging
+    - extending script parser for facts @todo @feature_facts
+    - reading a model from json (extending model) @todo @feature_model
+    - extending matcher for LessMatcher and MoreMatcher @todo @feature_matcher
+    - provide Travis CI support @todo @continuous_integration
 
   Work in progress:
     All those task have been started already ...
-    - providing matcher classes  @todo @feature_matcher
-    - providing a class for a fact @todo @feature_facts
 
   Done:
     All those tasks have been done ...
     - checkstyle at pom level @done @maven @quality
-
-
+    - configure project for log4j configuration for tests @done @configuration @logging
+    - providing a class for a fact @done @feature_facts
+    - providing at least two matcher classes  @done @feature_matcher
+    - provding xml tag validator tool @done @feature_validator

@@ -1,0 +1,8 @@
+# defining a model
+model persons "model for some persons"
+
+# adding some subject to the model
+subject Agatha Christie "is a writer"
+subject Rex Stout "is another writer"
+subject Timothy Zahn "is also a writer"
+ 

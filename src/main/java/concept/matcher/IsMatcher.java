@@ -55,10 +55,11 @@ public class IsMatcher<T> extends GenericMatcher<T> {
 
     @Override
     public boolean equals(Object obj) {
+        // comparing same object (same instance)
         if (this == obj) {
             return true;
         }
-
+        // not same type?
         if (!(obj instanceof IsMatcher)) {
             return false;
         }
