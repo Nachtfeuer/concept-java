@@ -11,6 +11,7 @@ Welcome to the concept simple todo page:
 
   Work in progress:
     All those task have been started already ...
+    - panel for visualizing shapes where the whole can be moved around and scaled @todo @ui_feature 
 
   Done:
     All those tasks have been done ...
@@ -19,3 +20,5 @@ Welcome to the concept simple todo page:
     - providing a class for a fact @done @feature_facts
     - providing at least two matcher classes  @done @feature_matcher
     - provding xml tag validator tool @done @feature_validator
+    - observable variables and a simple variables status bar @done @ui_feature
+    - scale controller and translate controller for ui @done @ui_feature

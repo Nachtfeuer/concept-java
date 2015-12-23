@@ -41,7 +41,7 @@ public final class Deserializer {
      *            path and name of file
      * @param cls
      *            class for which to deserialize.
-     * @param <T>
+     * @param <T> which can be any type derived from object.
      * @return instance of type T or null if failed to read JSON file.
      * @throws FileNotFoundException
      *             if file has not been found.
